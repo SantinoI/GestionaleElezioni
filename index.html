@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<!-- define angular app -->
+<html ng-app="GestionaleElezioni">
+
+<head>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+
+  <!-- Javascript -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+  <script src="script.js"></script>
+</head>
+
+<!-- Navbar -->
+<body ng-controller="mainController">
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Elezioni Comunali 2016 <i class="text-danger"> Live</i></a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
+        <li><a href="#login"><i class="fa fa-user"></i> Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="main">
+    <div ng-view></div>
+  </div>
+
+  
+</body>
+
+</html>
