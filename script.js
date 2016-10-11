@@ -28,8 +28,16 @@
         $scope.message = 'Sei nella home';
     });
 
-    GestionaleElezioni.controller('loginController', function($scope) {
-        $scope.message = 'Pagina Login..';
+    GestionaleElezioni.controller('loginController', function($scope,$http) {
+        $scope.accedi=function(){
+            console.log("test");    
+            $http.get("api.php?api=loginAdmin&username="+ $scope.username +"&password="+ $scope.password)
+                 .then(function(response) {
+                    if(response.data!= "Errore")
+                        alert("Login Effettuato");
+            });
+        }
+
     });
 
     GestionaleElezioni.controller('contactController', function($scope) {
