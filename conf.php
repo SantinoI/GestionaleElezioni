@@ -1,5 +1,4 @@
 <?php
-
 // hostname
 $nomehost = "localhost";   
 // utente per la connessione a MySQL  
@@ -8,5 +7,4 @@ $nomeuser = "root";
 $password = "s19";
 $nomeDatabase = "Gestionale Elezioni";
 $mysqli = new mysqli($nomehost,$nomeuser,$password,'Gestionale Elezioni');
-
 ?>

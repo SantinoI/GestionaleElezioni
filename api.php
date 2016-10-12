@@ -7,13 +7,20 @@ if($api == "loginAdmin"){
 	$password = md5($_GET['password']);
 	$utente = $mysqli->query("SELECT * FROM admin WHERE username = '".$username."' AND password = '".$password."';");
 	if($utente->num_rows){
-		$result = array();
-		while($r = mysqli_fetch_assoc($utente))
-			$result[]=$r;
-		print json_encode($result);
+		session_start();
+		$result = mysqli_fetch_assoc($utente);
+		$_SESSION['nomeUtente']=$result["username"];
+		print $result["username"];
 	}else{
-		echo "string";
+		print "Errore";
 	}
+}
+
+if($api == "controllo"){
+	session_start();
+	if(!(isset($_SESSION['nomeUtente']))|| $_SESSION['nomeUtente'] == "")
+		print "Errore";
+	else print $_SESSION['nomeUtente'];
 }
 
 ?>
