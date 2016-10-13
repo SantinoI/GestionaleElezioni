@@ -21,7 +21,11 @@
                 templateUrl : 'pages/insertPage.html',
                 controller : 'insertPageController'
             })
-
+            // adminPage
+            .when('/adminPage',{
+                templateUrl : 'pages/adminPage.html',
+                controller : 'adminPageController'
+            })
             // Contact Page
             .when('/contact', {
                 templateUrl : 'pages/contact.html',
@@ -29,17 +33,35 @@
             });
     });
 
-    GestionaleElezioni.controller('mainController', function($rootScope) {
-         
+    GestionaleElezioni.controller('mainController', function($scope, $http, $location,$rootScope) {
+        $http.get("api.php?api=controllo")
+                .then(function(response){
+                if(response.data.replace(/\r?\n/g,"") != "Errore"){
+                    $rootScope.username = response.data;
+                    $rootScope.loginUtente = true;
+                }      
+        });
     });
 
     GestionaleElezioni.controller('loginController', function($scope, $http, $location,$rootScope) {
-        $scope.accedi=function(){   
-            $http.get("api.php?api=loginAdmin&username="+ $scope.username +"&password="+ $scope.password)
+        $scope.accedi=function(){
+            if($scope.checkbox){
+                $rootScope.admin = true;
+                $rootScope.accesso = true;
+                var tipoUtente = "loginAdmin";
+            }
+            else {
+                $rootScope.admin = false;
+                $rootScope.accesso = true;
+                var tipoUtente = "loginUtente";
+            }
+
+            $http.get("api.php?api="+ tipoUtente +"&username="+ $scope.username +"&password="+ $scope.password)
                  .then(function(response) {                
                     if(response.data.replace(/\r?\n/g,"") != "Errore"){
                         $rootScope.username = response.data;
-                        $rootScope.login = true;
+                        if($scope.checkbox) $rootScope.loginAdmin = true;
+                        else  $rootScope.loginUtente = true;
                         $location.path('/');
                     }
                     else{
@@ -47,22 +69,20 @@
                     }
             });
         }
-
     });
+
 
     GestionaleElezioni.controller('contactController', function($scope) {
         $scope.message = 'Contatti';
     });
 
     GestionaleElezioni.controller('insertPageController',function($scope, $http, $location,$rootScope){
+        if($rootScope.admin) $location.path('/');
+    });
 
-            $http.get("api.php?api=controllo")
-                 .then(function(response){
-                   if(response.data.replace(/\r?\n/g,"") == "Errore") $location.path('/login');
-                   else{
-                    $rootScope.login = true;
-                   }      
-            });
+    GestionaleElezioni.controller('adminPageController',function($scope, $http, $location,$rootScope){
+        if($rootScope.admin == false) $location.path('/');
+
     });
     
 
