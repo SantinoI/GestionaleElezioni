@@ -15,7 +15,7 @@
 </head>
 
 <!-- Navbar -->
-<body>
+<body ng-controller = "mainController">
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
@@ -24,8 +24,9 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
         <li><a href="#contact"><i class="fa fa-comment"></i> Contact</a></li>
-        <li ng-hide ="login"><a href="#login"><i class="fa fa-user"></i> Login</a></li>
-        <li ng-show ="login"><a href="#insertPage"><i class="fa fa-barcode"></i> Operatore {{username}}</a></li>
+        <li ng-hide ="loginAdmin || loginUtente"><a href="#login"><i class="fa fa-user"></i> Login</a></li>
+        <li ng-show ="loginUtente && !loginAdmin"><a href="#insertPage"><i class="fa fa-user"></i> Operatore {{username}}</a></li>
+        <li ng-show ="loginAdmin"><a href="#adminPage"><i class="fa fa-user"></i> Operatore {{username}}</a></li>
       </ul>
     </div>
   </nav>
