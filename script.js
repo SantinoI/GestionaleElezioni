@@ -1,12 +1,17 @@
 // script.js
 
-    var GestionaleElezioni = angular.module('GestionaleElezioni', ['ngRoute']);
+    var GestionaleElezioni = angular.module('GestionaleElezioni', ['ngRoute','ui.bootstrap']);
 
     GestionaleElezioni.config(function($routeProvider) {
         $routeProvider
 
             // Home Page
             .when('/', {
+                templateUrl : 'pages/home.html',
+                controller  : 'mainController'
+            })
+
+            .when('/home', {
                 templateUrl : 'pages/home.html',
                 controller  : 'mainController'
             })
@@ -34,6 +39,10 @@
     });
 
     GestionaleElezioni.controller('mainController', function($scope, $http, $location,$rootScope) {
+         $http.get("api.php?api=getRisultati")
+            .then(function(response){
+                $scope.risultati = response.data;
+            });
         $http.get("api.php?api=controllo")
                 .then(function(response){
                 if(response.data.replace(/\r?\n/g,"") != "Errore"){
