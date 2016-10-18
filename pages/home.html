@@ -1,5 +1,15 @@
-<div class="jumbotron text-center">
-	<h1>Home Page</h1>
-	
-	<p>{{ message }}</p>
-</div>
+
+    <div class ="container">
+        <div class="row">
+            <div class="col-sm-3" ng-repeat="persona in risultati">
+                <div class=" well well-sm text-center" >
+                    <label class="text-muted"> <h2> {{persona.cognome}}</h2></label>
+                    <label class="text-muted"> <p> {{persona.nome}}</p></label>
+                    <br>
+                    <img style= "max-width: 70%; margin: auto; " ng-src="{{persona.foto}}" class="img-circle  center-block img-fluid" alt="" width="150" height="150" > 
+                    <br>
+                    <label class="text"> <h2> {{persona.voti}}</h2></label>
+                </div>
+            </div>
+        </div>
+    </div>
