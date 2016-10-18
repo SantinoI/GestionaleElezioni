@@ -37,5 +37,16 @@ if($api == "controllo"){
 	else print $_SESSION['nomeUtente'];
 }
 
+
+if($api == "getRisultati"){
+	$sql ="SELECT nome, cognome, voti,foto FROM candidatiSindaco ORDER BY cognome ASC";
+	$result = mysqli_query($mysqli,$sql);
+	$var = array();
+	while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+		array_push($var, $row);
+	}
+	echo json_encode($var);
+}
+
 ?>
 
